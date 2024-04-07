@@ -1,126 +1,133 @@
 <h2 class="text-center font-mono text-2xl text-black">Validaciones Reactivas</h2>
 <hr class="border-amber-500">
-<!-- <div class="grid grid-cols-2 gap-4"> -->
-<form class="grid grid-cols-2 gap-4 mt-4" [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
-  <!-- Nombre -->
-  <div class="col-span-1 rounded-lg ">
-    <div class="rounded-lg">
-      <label class="m-1">Nombre :</label>
+<div>
+  <form class="grid grid-cols-2 gap-4 mt-4" [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
+    <!-- Nombre -->
+    <div class="col-span-1 rounded-lg ">
+      <div class="rounded-lg">
+        <label class="m-1">Nombre :</label>
+      </div>
+      <div>
+        <input type="text"
+          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Nombres del usuario" formControlName="nombre">
+
+        <span *ngIf="isValidField('nombre')" class="text-red-600">
+          Debe de ser en formato de primer y segundo nombre
+        </span>
+      </div>
     </div>
-    <div>
-      <input type="text"
-        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        placeholder="Nombres del usuario" formControlName="nombre">
 
-      <span class="text-red-600">
-        Debe de ser en formato de primer y segundo nombre
-      </span>
+    <!-- Apellido -->
+    <div class="col-span-1 rounded-lg ">
+      <div class="rounded-lg">
+        <label class="m-1">Apellido :</label>
+      </div>
+      <div>
+        <input type="text"
+          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Apellidos del usuario" formControlName="apellido">
+
+        <span *ngIf="isValidField('apellido')" class="text-red-600">
+          Debe de ser en formato de primer y segundo apellido
+        </span>
+      </div>
     </div>
-  </div>
 
-  <!-- Apellido -->
-  <div class="col-span-1 rounded-lg ">
-    <div class="rounded-lg">
-      <label class="m-1">Apellido :</label>
+    <!-- Email -->
+    <div class="col-span-2 rounded-lg">
+      <div class="rounded-lg">
+        <label class="m-1">Correo :</label>
+      </div>
+      <div>
+        <input type="email"
+          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Email del usuario" formControlName="correo">
+        <span *ngIf="isValidField('correo')" class="text-red-600">
+          mensaje de error del email
+        </span>
+      </div>
     </div>
-    <div>
-      <input type="text"
-        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        placeholder="Apellidos del usuario" formControlName="apellido">
 
-      <span class="text-red-600">
-        Debe de ser en formato de primer y segundo apellido
-      </span>
+    <!-- Username -->
+    <div class="col-span-2 rounded-lg ">
+      <div class="rounded-lg">
+        <label class="m-1">Usuario :</label>
+      </div>
+      <div>
+        <input type="text"
+          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Nombre código del usuario" formControlName="usuario">
+        <span *ngIf="isValidField('usuario')" class="form-text text-red-600">
+          El username no puede ser Strider
+        </span>
+      </div>
     </div>
-  </div>
 
-  <!-- Email -->
-  <div class="col-span-2">
-    <div class="rounded-lg">
-      <label class="m-1">Email :</label>
+    <!-- Password -->
+    <div class="col-span-1 rounded-lg ">
+      <div class="rounded-lg">
+        <label class="m-1">Contraseña :</label>
+      </div>
+      <div>
+        <input type="password"
+          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Password de su cuenta" formControlName="contrasena">
+
+        <span *ngIf="isValidField('contrasena')" class="form-text text-red-600">
+          La contraseña debe de ser mayor de 6 caracteres.
+        </span>
+      </div>
     </div>
-    <div class="col-sm-9">
-      <input type="email"
-        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        placeholder="Email del usuario" formControlName="correo">
-      <span class="form-text text-red-600">
-        mensaje de error del email
-      </span>
+
+    <!-- Password2 -->
+    <div class="col-span-1 rounded-lg ">
+      <div class="rounded-lg">
+        <label class="m-1">Confirmar contraseña :</label>
+      </div>
+      <div>
+        <input type="password"
+          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Confirmar la contraseña" formControlName="confirmacionContrasena">
+
+        <span *ngIf="isValidField('confirmacionContrasena')" class="form-text text-red-600">
+          Las contraseñas deben de ser iguales
+        </span>
+      </div>
     </div>
-  </div>
 
-  <!-- Username -->
-  <div class="col-span-2">
-    <label class="col-sm-3 col-form-label">Username</label>
-    <div class="col-sm-9">
-      <input type="text"
-        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        placeholder="Nombre código del usuario" formControlName="usuario">
-      <span class="form-text text-red-600">
-        El username no puede ser Strider
-      </span>
-    </div>
-  </div>
-
-  <!-- Password -->
-  <div class="col-span-1">
-    <label class="col-sm-3 col-form-label">Password</label>
-    <div class="col-sm-9">
-      <input type="password"
-        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        placeholder="Password de su cuenta" formControlName="contrasena">
-
-      <span class="form-text text-red-600">
-        La contraseña debe de ser mayor de 6 caracteres.
-      </span>
-    </div>
-  </div>
-
-  <!-- Password2 -->
-  <div class="col-span-1">
-    <label class="col-sm-3 col-form-label">Confirmar</label>
-    <div class="col-sm-9">
-      <input type="password"
-        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        placeholder="Confirmar la contraseña" formControlName="confirmacionContrasena">
-
-      <span class="form-text text-red-600">
-        Las contraseñas deben de ser iguales
-      </span>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-primary float-end" type="submit">
+    <div class="col-span-2 grid justify-items-center ">
+      <button class="bg-amber-400 rounded-md py-2 px-4 text-center" type="submit">
         Crear
       </button>
     </div>
-  </div>
 
-</form>
-<!-- </div> -->
+  </form>
+</div>
+
+<div>
+  <h2>Form Valid: {{ formulario.valid }} </h2>
+  <h2>Form Status: {{ formulario.status }} </h2>
+  <h2>Form Pending: {{ formulario.pending }} </h2>
+  <h2>Form errors</h2>
+  <pre>{{  formulario.errors|json }}</pre>
+
+  <h5>Nombre</h5>
+  <pre>{{  formulario.controls['nombre'].errors|json   }}</pre>
+
+  <h5>Apellido</h5>
+  <pre>{{  formulario.controls['apellido'].errors |json   }}</pre>
+
+  <h5>Email</h5>
+  <pre>{{  formulario.controls['correo'].errors|json  }}</pre>
+
+  <h5>Username</h5>
+  <pre>{{  formulario.controls['usuario'].errors |json  }}</pre>
 
 
-<h2>Form Valid: {{ formulario.valid }} </h2>
-<h2>Form Status: {{ formulario.status }} </h2>
-<h2>Form Pending: {{ formulario.pending }} </h2>
-<h2>Form errors</h2>
-<pre>{{  formulario.errors|json }}</pre>
+  <h5>Password</h5>
+  <pre>{{  formulario.value.contrasena |json }}</pre>
 
-<h5>Nombre</h5>
-<pre>{{  formulario.value.nombre |json   }}</pre>
-
-<h5>Email</h5>
-<pre>{{  formulario.value.correo |json  }}</pre>
-
-<h5>Username</h5>
-<pre>{{  formulario.controls['usuario'].errors |json  }}</pre>
-
-
-<h5>Password</h5>
-<pre>{{  formulario.value.contrasena |json }}</pre>
-
-<h5>Confirmar</h5>
-<pre>{{  formulario.value.confirmacionContrasena |json  }}</pre>
+  <h5>Confirmar</h5>
+  <pre>{{  formulario.controls['confirmacionContrasena'].errors  |json  }}</pre>
+</div>

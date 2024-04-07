@@ -1,83 +1,98 @@
-<h2>Reactivos: <small> Dinámicos </small></h2>
-<hr>
+<div>
+  <h2 class="text-center font-mono text-2xl text-black">Reactivos: <small> Dinámicos </small></h2>
+</div>
+<div class="grid grid-cols-1 ">
+  <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()" autocomplete="off">
 
-<form autocomplete="off">
-
-  <!-- Nombre -->
-  <div class="mb-3 row">
-    <label class="col-sm-3 col-form-label">Nombre</label>
-    <div class="col-sm-9">
-      <input class="form-control" placeholder="Nombre de la persona">
-      <span class="form-text text-danger">
-        error message
-      </span>
+    <!-- Nombre -->
+    <div class="grid grid-rows-1 bg-black">
+      <div class="col-span-3">
+        <label class="text-orange-500">Nombre</label>
+      </div>
+      <div class="col-span-9">
+        <input
+          class="mt-1 block rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+          placeholder="Nombre de la persona" formControlName="nombre">
+        <span *ngIf="isValidField('nombre')" class="form-text text-red-600">
+          {{ getFieldError('nombre') }}
+        </span>
+      </div>
     </div>
-  </div>
 
-  <!-- Agregar Favorito -->
-  <div class="mb-3 row">
-    <label class="col-sm-3 col-form-label">Agregar</label>
-    <div class="col-sm-9">
+    <!-- Agregar Favorito -->
+    <div class="mb-3 grid-cols-12">
+      <label
+        class="col-span-3 px-4 py-1 text-sm text-red-500 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Agregar</label>
+      <div class="col-span-9">
 
-      <div class="input-group">
-        <input class="form-control" placeholder="Agregar favorito">
+        <div class="input-group">
+          <input
+            class="mt-1 block  rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+            placeholder="Agregar favorito" [formControl]="nuevoJuegoFavorito">
 
 
-        <button class="btn btn-outline-primary" type="button">
-          Agregar favorito
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="button"
+            (click)="agregarJuegoFavorito()">
+            Agregar favorito
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Lista de Juegos Favoritos -->
+    <div class="grid-cols-12 mb-3 ">
+      <label class="col-span-3  text-black text-center">Favoritos</label>
+      <div class="col-span-9" formArrayName="juegosFavoritos">
+
+        <!-- <div class="mb-1" *ngFor="let favorito of miFormulario.controls['juegosFavoritos'].value"> -->
+        <div class="mb-1" *ngFor="let favorito of listaJuegosFavoritos.controls; let i = index">
+          <div class="">
+            <input
+              class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+              type="text" [formControlName]="i">
+
+            <button (click)="eliminarJuegoFavorito(i)"
+              class="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+              type="button">
+              Eliminar
+            </button>
+          </div>
+          <span *ngIf="isValidFieldInArray(listaJuegosFavoritos,i)" class="form-text text-red-600">
+            Este campo es requerido
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="grid-rows-1">
+      <div class="col-span-1">
+        <button class="bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
+          <!-- [disabled]="myForm.invalid" -->
+          Guardar
         </button>
       </div>
     </div>
+
+  </form>
+</div>
+
+<div class="grid grid-cols-4">
+  <div class="col-span-1">
+    <span>Valid</span>
+    <pre>{{ miFormulario.valid  }}</pre>
   </div>
 
-
-  <!-- Lista de Juegos Favoritos -->
-  <div class="mb-3 row">
-    <label class="col-sm-3 col-form-label">Favoritos</label>
-    <div class="col-sm-9">
-
-      <div class="mb-1">
-
-        <div class="input-group">
-          <input class="form-control">
-
-          <button class="btn btn-outline-danger" type="button">
-            Eliminar
-          </button>
-        </div>
-        <span class="form-text text-danger">
-          Este campo es requerido
-        </span>
-
-      </div>
-
-    </div>
+  <div class="col-span-1">
+    <span>Value</span>
+    <pre>{{ miFormulario.value  }}</pre>
   </div>
 
-
-
-  <div class="row">
-    <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary float-end">
-        <!-- [disabled]="myForm.invalid" -->
-        Guardar
-      </button>
-    </div>
+  <div class="col-span-2">
+    <span>Agregar Juego</span>
+    <pre>{{ nuevoJuegoFavorito.valid  }}</pre>
+    <br>
+    <pre>{{ nuevoJuegoFavorito.value  }}</pre>
   </div>
-
-
-</form>
-
-
-
-<span>Valid</span>
-<pre>{{ 'object'  }}</pre>
-<br>
-
-<span>Value</span>
-<pre>{{ 'object'  }}</pre>
-<br>
-
-<span>Agregar Juego</span>
-<pre>{{ 'object'  }}</pre>
-<pre>{{ 'object'  }}</pre>
+</div>

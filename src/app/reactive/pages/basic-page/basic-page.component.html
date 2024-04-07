@@ -1,25 +1,35 @@
-<h2 class="text-center font-mono text-2xl text-blue-600	">Reactivos: Básicos</h2>
+<h2 class="text-center font-mono text-2xl text-black">Reactivos: Básicos</h2>
 
 <hr>
 
-<div class="grid grid-rows-1">
+<div class="grid grid-rows-1 gap-10">
   <div class="col-auto">
-
-    <form autocomplete="off">
+    <form [formGroup]="miFormulario" (ngSubmit)="onSave()" autocomplete="off">
 
       <!-- Campo de producto -->
-      <div class="grid-rows-1">
+      <div class="grid-rows-12">
         <label class="col-span-3 block text-sm font-medium leading-6 text-gray-900">Producto</label>
         <div class="col-span-9">
 
           <input type="text"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="Nombre del producto">
+            placeholder="Nombre del producto" formControlName="producto">
 
-          <span class="form-text text-danger">
-            <!-- Debe de ser de 3 letras -->
-            error message
+          <span *ngIf="isValidField('producto')" class="form-text text-red-600">
+            {{getFieldError('producto')}}
           </span>
+
+          <!-- <span
+            *ngIf="miFormulario.controls['producto'].getError('required') && miFormulario.controls['producto'].touched"
+            class="form-text text-red-600">
+            Este campo es requerido
+          </span> -->
+
+          <!-- <span
+            *ngIf="miFormulario.controls['producto'].getError('minlength') && miFormulario.controls['producto'].touched"
+            class="form-text text-red-600">
+            Este campo requiere como minimo 4 letras
+          </span> -->
         </div>
       </div>
 
@@ -27,8 +37,8 @@
       <div class="grid-rows-1 mb-3">
         <label class="col-span-3 col-form-label">Precio</label>
         <div class="col-span-9">
-          <input type="number" class="form-control" placeholder="Precio del producto">
-          <span class="form-text text-danger">
+          <input type="number" class="form-control" placeholder="Precio del producto" formControlName="precio">
+          <span class="form-text  text-red-600" *ngIf="isValidField('precio')">
             El precio debe de ser 0 o mayor
           </span>
         </div>
@@ -38,9 +48,9 @@
       <div class="grid-rows-1 mb-3">
         <label class="col-span-3 col-form-label">Existencias</label>
         <div class="col-span-9">
-          <input type="number" class="form-control" placeholder="Existencias del producto">
+          <input type="number" class="form-control" placeholder="Existencias del producto" formControlName="enAlmacen">
 
-          <span class="form-text text-danger">
+          <span class="form-text  text-red-600" *ngIf="isValidField('enAlmacen')">
             Las existencias deben de ser 0 o mayor
           </span>
         </div>
@@ -63,27 +73,46 @@
 </div>
 
 
-
-
-<div class="grid-rows-1">
-  <div class="col-auto">
-
+<div class="grid grid-cols-8 gap-10 mt-10">
+  <div class="col-span-1">
     <span>Valid</span>
-    <pre>{{ 'objeto'  }}</pre>
-
-    <span>Pristine</span>
-    <pre>{{ 'objeto'  }}</pre>
-
-    <span>Touched</span>
-    <pre>{{ 'objeto'  }}</pre>
-
-    <span>Value</span>
-    <pre>{{ 'objeto'  }}</pre>
-
-    <span>Precio</span>
-    <pre>{{ 'objeto'  }}</pre>
-
-    <span>Producto</span>
-    <pre>{{ 'objeto'  }}</pre>
+    <p class="break-normal">{{ miFormulario.valid | json }}</p>
   </div>
+
+  <div class="col-span-1">
+    <span>Pristine</span>
+    <p class="break-normal">{{ miFormulario.pristine | json }}</p>
+  </div>
+
+
+  <div class="col-span-1 bg-amber-500">
+    <span>Touched</span>
+    <p class="break-normal">{{ miFormulario.touched | json }}</p>
+  </div>
+
+  <div class="col-span-1">
+    <span>Value</span>
+    <p class="break-normal">{{ miFormulario.value | json }}</p>
+  </div>
+
+  <div class="col-span-1">
+    <span>Precio</span>
+    <p class="break-normal">{{ miFormulario.controls['precio'].value| json }}</p>
+  </div>
+
+  <div class="col-span-1">
+    <span>Precio-Error</span>
+    <p>{{ miFormulario.controls['precio'].errors| json }}</p>
+  </div>
+
+  <div class="col-span-1">
+    <span>Producto</span>
+    <p>{{ miFormulario.controls['producto'].value | json }}</p>
+  </div>
+
+  <div class="col-span-1">
+    <span>Producto-Error</span>
+    <p>{{ miFormulario.controls['producto'].errors | json }}</p>
+  </div>
+
 </div>

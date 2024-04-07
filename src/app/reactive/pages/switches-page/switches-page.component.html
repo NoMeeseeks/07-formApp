@@ -1,24 +1,23 @@
-<h2>Reactivos: Switches</h2>
+<h2 class="text-center font-mono text-2xl text-black">Reactivos: Switches</h2>
 <hr>
 
-
-<form autocomplete="off">
+<form [formGroup]="formulario" (submit)="guardar()" autocomplete="off">
 
   <!-- Radio -->
-  <div class="row mb-3">
-    <label class="col-sm-3 col-form-label">Género</label>
-    <div class="col-sm-9">
+  <div class="grid grid-cols-1 mb-3">
+    <label class="col-span-3 text-cyan-500">Género</label>
+    <div class="col-span-9">
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" value="M" id="radioMasculino">
-        <label class="form-check-label" for="radioMasculino">
+      <div class="">
+        <input type="radio" value="M" id="radioMasculino" formControlName="genero">
+        <label for="radioMasculino">
           Masculino
         </label>
       </div>
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" value="F" id="radioFemenino">
-        <label class="form-check-label" for="radioFemenino">
+      <div class="">
+        <input type="radio" value="F" id="radioFemenino" formControlName="genero">
+        <label for="radioFemenino">
           Femenino
         </label>
       </div>
@@ -27,29 +26,29 @@
   </div>
 
   <!-- Switches -->
-  <div class="row mb-3">
-    <label class="col-sm-3 col-form-label">Notificaciones</label>
-    <div class="col-sm-9">
+  <div class="grid grid-cols-1 mb-3">
+    <label class="col-span-3">Notificaciones</label>
+    <div class="col-span-9">
 
       <div class="form-check form-switch mt-2">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
+        <input type="checkbox" id="flexSwitchCheckChecked" formControlName="quiereNotificaciones">
+        <label for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
       </div>
 
     </div>
   </div>
 
   <!-- Switches -->
-  <div class="row mb-3">
-    <label class="col-sm-3 col-form-label"></label>
-    <div class="col-sm-9">
+  <div class="grid grid-cols-1 mb-3">
+    <label class="col-span-3 col-form-label"></label>
+    <div class="col-span-9">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
+        <input type="checkbox" id="flexCheckDefault" formControlName="terminosYcondiciones">
+        <label for="flexCheckDefault">
           Términos y condiciones de uso
         </label>
       </div>
-      <span class="form-text text-danger">
+      <span *ngIf="isValidField('terminosYcondiciones')" class="form-text text-red-600">
         Debe de aceptar las condiciones de uso
       </span>
 
@@ -70,7 +69,7 @@
 
 
 <h5>Valor del formulario</h5>
-<pre>{{ 'object'  }}</pre>
+<pre>{{ formulario.value | json  }}</pre>
 <br>
 
 <h5>Persona</h5>
@@ -78,7 +77,7 @@
 <br>
 
 <h5>Valid</h5>
-<pre>{{ 'object'  }}</pre>
+<pre>{{ formulario.valid | json  }}</pre>
 
 <!-- <h5>Términos</h5> -->
 <!-- <pre>{{ myForm.controls?.terminos?.errors | json }}</pre> -->

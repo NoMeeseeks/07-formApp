@@ -70,7 +70,7 @@ export class DynamicPageComponent implements OnInit {
 
   onSubmit(): void {
     if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched;
+      this.miFormulario.markAllAsTouched();
       return;
     }
 

@@ -1,0 +1,15 @@
+<h2>Paginas</h2>
+<hr>
+<h3>Reactive</h3>
+<ul>
+  <li *ngFor="let reactMenu of reactiveMenu" [routerLink]="[reactMenu.route]" routerLinkActive="active">
+    {{ reactMenu.title }}
+  </li>
+</ul>
+
+<h3>Auth</h3>
+<ul>
+  <li *ngFor="let auth of authMenu" [routerLink]="[auth.route]" routerLinkActive="active">
+    {{ auth.title }}
+  </li>
+</ul>
